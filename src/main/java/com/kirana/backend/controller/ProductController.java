@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kirana.backend.model.Product;
 import com.kirana.backend.service.ProductService;
 
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin(origins = "https://kirana-shop-products-management-sof.vercel.app") 
 
 
 @RestController
