@@ -10,5 +10,6 @@ import com.kirana.backend.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByExpiryDateBefore(LocalDate date);
+    List<Product> findByExpiryDateBefore(LocalDate date); // already expired
+    List<Product> findByExpiryDateBetween(LocalDate start, LocalDate end); // expiring soon
 }

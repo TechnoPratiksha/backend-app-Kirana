@@ -1,11 +1,13 @@
 package com.kirana.backend.service;
 
-import com.kirana.backend.model.Product;
-import com.kirana.backend.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kirana.backend.model.Product;
+import com.kirana.backend.repository.ProductRepository;
 
 @Service
 public class ProductService {
@@ -21,10 +23,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    // Products expiring in next 'days'
+    // Products expiring in next 'days' (excluding already expired)
     public List<Product> getExpiringProducts(int days) {
-        LocalDate targetDate = LocalDate.now().plusDays(days);
-        return productRepository.findByExpiryDateBefore(targetDate);
+        LocalDate today = LocalDate.now();
+        LocalDate targetDate = today.plusDays(days);
+        return productRepository.findByExpiryDateBetween(today.plusDays(1), targetDate);
     }
 
     // Products already expired
